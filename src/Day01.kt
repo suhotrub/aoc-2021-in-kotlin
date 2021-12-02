@@ -1,17 +1,20 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+
+    fun Sequence<String>.toInt() = map(String::toInt)
+
+    fun Sequence<Int>.countIncreasing(): Int {
+        var prev = Int.MIN_VALUE
+        return count { (prev < it).apply { prev = it } } - 1
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part1(lines: Sequence<String>): Int = lines.toInt().countIncreasing()
+
+    fun part2(lines: Sequence<String>): Int {
+        return lines.toInt()
+            .windowed(3).map(List<Int>::sum)
+            .countIncreasing()
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    println(invokeOnLines("Day01", ::part1))
+    println(invokeOnLines("Day01", ::part2))
 }
