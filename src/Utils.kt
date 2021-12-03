@@ -8,3 +8,7 @@ fun <T> invokeOnLines(name: String, block: Sequence<String>.() -> T): T {
         return block(it)
     }
 }
+
+fun <T> invokeOnLinesInMemory(name: String, block: List<String>.() -> T): T {
+    return block(File("src", "$name.txt").readLines())
+}
