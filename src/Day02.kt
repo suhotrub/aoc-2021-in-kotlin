@@ -27,12 +27,8 @@ fun main() {
                     pos += num
                     depth += aim * num
                 }
-                "down" -> {
-                    aim += num
-                }
-                "up" -> {
-                    aim -= num
-                }
+                "down" -> aim += num
+                "up" -> aim -= num
             }
         }
         return pos * depth
