@@ -21,7 +21,8 @@ fun <Input, Data : Pair<(Input) -> Output, Output>, Output> evaluateDay(
 ) {
     val filename = "Day$dayNumber"
     listOf(part1Data, part2Data).forEach { (func, test) ->
-        check(func(invokeOnLinesInMemory("${filename}_test", prepareInput)) == test)
+        val testResult = func(invokeOnLinesInMemory("${filename}_test", prepareInput))
+        check(testResult == test) { "Was $testResult but $test expected" }
         println(func(invokeOnLinesInMemory(filename, prepareInput)))
     }
 }
